@@ -10,5 +10,6 @@ export default StyleSheet.create({
   },
   button: {
     height: '7vh',
+    width: '100%',
   },
 })
