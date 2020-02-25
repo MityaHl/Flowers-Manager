@@ -1,12 +1,17 @@
 import React from 'react'
-import EnterPage from './components/pages/EnterPage'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+
+import TerminalPage from './components/pages/TerminalPage/component'
+import EnterPageButtons from '@/components/controls/EnterPageButtons'
+import ShopLoginForm from '@/components/pages/ShopLoginForm'
 
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <EnterPage />
+        <Route path="/" exact component={EnterPageButtons} />
+        <Route path="/loginterminal" exact component={ShopLoginForm} />
+        <Route path="/terminal" exact component={TerminalPage} />
       </Switch>
     </BrowserRouter>
   )

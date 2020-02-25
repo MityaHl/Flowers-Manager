@@ -11,6 +11,8 @@ const EnterPageButtons = () => {
     <Grid
       container
       direction="column"
+      justify="center"
+      alignItems="center"
       className={css(styles.formGrid)}
     >
       <Link to="/loginterminal">

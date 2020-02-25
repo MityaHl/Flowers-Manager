@@ -17,7 +17,7 @@ const EnterPage = () => {
       justify="center"
       alignItems="center"
     >
-      <Route path="/" exact component={EnterPageButtons} />
+      <Route path="/enterpage" exact component={EnterPageButtons} />
       <Route path="/loginterminal" exact component={ShopLoginForm} />
     </Grid>
   )

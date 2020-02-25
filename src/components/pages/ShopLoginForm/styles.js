@@ -2,9 +2,10 @@ import { StyleSheet } from 'aphrodite'
 
 export default StyleSheet.create({
   formGrid: {
-    width: '50vh',
+    height: '90vh',
   },
   field: {
-    marginTop: '10px',
+    marginTop: '15px',
+    width: '50vh',
   },
 })

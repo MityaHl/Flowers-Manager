@@ -1,3 +1,3 @@
-import ShopLoginForm from './component'
+import ShopLoginForm from './container'
 
 export default ShopLoginForm
