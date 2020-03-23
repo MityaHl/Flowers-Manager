@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { css } from 'aphrodite'
 import { Redirect } from 'react-router-dom'
 import { Formik, Form, Field } from 'formik'
@@ -9,27 +9,23 @@ import Typography from '@material-ui/core/Typography'
 
 import styles from './styles'
 
-const ShopLoginForm = ({ isLoginTerminal, isLoginShop, loginTerminal, loginShop }) => {
-  const onLoginTerminal = () => {
-    loginTerminal()
-  }
-
-  const onLoginShop = () => {
+const ShopLoginForm = ({ loginTerminalData, loginShopData, loginTerminal, loginShop }) => {
+  const onLoginShop = useCallback(() => {
     loginShop()
-  }
+  })
 
-  if (isLoginTerminal) {
+  if (loginTerminalData.token) {
     return (
-      <Redirect to="/terminal" />
+      <Redirect to="/terminal/orders" />
     )
   }
 
   return (
     <Formik
       initialValues={{
-        shopName: '',
-        shopPassword: '',
-        sellerPassword: '',
+        terminalLogin: '',
+        terminalPassword: '',
+        floristPassword: '',
       }}
     >
       {({
@@ -37,7 +33,7 @@ const ShopLoginForm = ({ isLoginTerminal, isLoginShop, loginTerminal, loginShop 
       }) => (
         <Form>
           {
-            !isLoginShop
+            !loginShopData
               ? (
                 <Grid
                   container
@@ -52,13 +48,13 @@ const ShopLoginForm = ({ isLoginTerminal, isLoginShop, loginTerminal, loginShop 
                   <Field
                     component={TextField}
                     label="Логин магазина"
-                    name="shopName"
+                    name="terminalLogin"
                     variant="outlined"
                     className={css(styles.field)} />
                   <Field
                     component={TextField}
                     label="Пароль магазина"
-                    name="shopPassword"
+                    name="terminalPassword"
                     type="password"
                     variant="outlined"
                     className={css(styles.field)} />
@@ -66,7 +62,9 @@ const ShopLoginForm = ({ isLoginTerminal, isLoginShop, loginTerminal, loginShop 
                     variant="contained"
                     color="primary"
                     className={css(styles.field)}
-                    onClick={onLoginShop}
+                    onClick={() => {
+                      loginShop(values)
+                    }}
                   >
                     Войти в магазин
                   </Button>
@@ -85,7 +83,7 @@ const ShopLoginForm = ({ isLoginTerminal, isLoginShop, loginTerminal, loginShop 
                   </Typography>
                   <Field
                     component={TextField}
-                    name="sellerPassword"
+                    name="floristPassword"
                     label="Пароль флориста"
                     type="password"
                     variant="outlined"
@@ -94,7 +92,9 @@ const ShopLoginForm = ({ isLoginTerminal, isLoginShop, loginTerminal, loginShop 
                     variant="contained"
                     color="primary"
                     className={css(styles.field)}
-                    onClick={onLoginTerminal}
+                    onClick={() => {
+                      loginTerminal(values.floristPassword)
+                    }}
                   >
                     Войти в терминал
                   </Button>

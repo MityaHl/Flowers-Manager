@@ -2,16 +2,16 @@ import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
 import TerminalPage from './components/pages/TerminalPage/component'
-import EnterPageButtons from '@/components/controls/EnterPageButtons'
+import EnterPage from '@/components/pages/EnterPage'
 import ShopLoginForm from '@/components/pages/ShopLoginForm'
 
 const App = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact component={EnterPageButtons} />
-        <Route path="/loginterminal" exact component={ShopLoginForm} />
-        <Route path="/terminal" exact component={TerminalPage} />
+        <Route path="/loginterminal" component={ShopLoginForm} />
+        <Route path="/terminal" component={TerminalPage} />
+        <Route path="/" exact component={EnterPage} />
       </Switch>
     </BrowserRouter>
   )

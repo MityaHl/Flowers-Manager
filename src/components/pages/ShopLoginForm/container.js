@@ -6,13 +6,13 @@ import { loginShop } from '@/store/actions/loginShop'
 import ShopLoginForm from './component'
 
 const mapStateToProps = state => ({
-  isLoginTerminal: state.loginTerminal,
-  isLoginShop: state.loginShop,
+  loginTerminalData: state.loginTerminal,
+  loginShopData: state.loginShop,
 })
 
 const mapDispatchToProps = dispatch => ({
-  loginTerminal: () => dispatch(loginTerminal()),
-  loginShop: () => dispatch(loginShop()),
+  loginTerminal: data => dispatch(loginTerminal(data)),
+  loginShop: data => dispatch(loginShop(data)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ShopLoginForm)

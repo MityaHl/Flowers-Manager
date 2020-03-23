@@ -1,4 +1,9 @@
-export const loginTerminal = () => ({
+export const loginTerminal = data => ({
   type: 'LOGIN_TERMINAL',
-  payload: true,
+  payload: data,
+})
+
+export const putLoginTerminalData = data => ({
+  type: 'PUT_LOGIN_TERMINAL_DATA',
+  payload: data,
 })
