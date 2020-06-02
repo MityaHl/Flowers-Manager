@@ -1,13 +1,15 @@
 import React from 'react'
 import { css } from 'aphrodite'
 import Grid from '@material-ui/core/Grid'
+import { Resizable, ResizableBox } from 'react-resizable'
+import SplitPane, { Pane } from 'react-split-pane'
 
 import OrderList from './OrderList'
 import OrderListSearch from './OrderListSearch'
 
 import styles from './styles'
 
-const OrderListPage = () => {
+const OrderListPage = ({ sorts }) => {
   return (
     <Grid
       container
@@ -18,7 +20,7 @@ const OrderListPage = () => {
         item
         xs={3}
       >
-        <OrderListSearch />
+        <OrderListSearch sorts={sorts} />
       </Grid>
       <Grid
         item

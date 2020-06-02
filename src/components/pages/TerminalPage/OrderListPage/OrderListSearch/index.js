@@ -1,3 +1,3 @@
-import OrderListSearch from './component'
+import OrderListSearch from './container'
 
 export default OrderListSearch

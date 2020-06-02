@@ -1,3 +1,3 @@
-import OrderListPage from './component'
+import OrderListPage from './container'
 
 export default OrderListPage

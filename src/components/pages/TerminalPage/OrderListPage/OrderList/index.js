@@ -1,3 +1,3 @@
-import OrderList from './component'
+import OrderList from './container'
 
 export default OrderList

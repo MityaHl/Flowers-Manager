@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { css } from 'aphrodite'
 import Grid from '@material-ui/core/Grid'
 import InputLabel from '@material-ui/core/InputLabel'
@@ -11,8 +11,22 @@ import Typography from '@material-ui/core/Typography'
 
 import styles from './styles'
 
-const OrderListSearch = () => {
-  const [searchType, setSearchType] = useState(10)
+const OrderListSearch = ({ sorts, getSortOrders, getSearchOrders, searches }) => {
+  const [searchType, setSearchType] = useState('Выбор')
+  const [sortType, setSortType] = useState('')
+  const [searchInfo, setSearchInfo] = useState('')
+
+  const handleSort = useCallback(() => {
+    getSortOrders(sortType)
+  })
+
+  const handleSearch = useCallback(() => {
+    const searchData = {
+      url: searchType,
+      param: searchInfo,
+    }
+    getSearchOrders(searchData)
+  })
 
   return (
     <div className={css(styles.orderListControls)}>
@@ -37,13 +51,19 @@ const OrderListSearch = () => {
               }}
               label="Тип поиска"
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {
+                searches && searches.map((search, index) => (
+                  <MenuItem key={search.id} value={search.value}>{search.title}</MenuItem>
+                ))
+              }
             </Select>
           </FormControl>
           <TextField
             className={css(styles.form)}
+            value={searchInfo}
+            onChange={e => {
+              setSearchInfo(e.target.value)
+            }}
             id="outlined-search"
             label="Информация"
             variant="outlined" />
@@ -51,6 +71,7 @@ const OrderListSearch = () => {
             variant="contained"
             color="primary"
             className={css(styles.button)}
+            onClick={handleSearch}
           >
             Найти
           </Button>
@@ -71,21 +92,24 @@ const OrderListSearch = () => {
           >
             <InputLabel>Тип сортировки</InputLabel>
             <Select
-              value={searchType}
+              value={sortType}
               onChange={e => {
-                setSearchType(e.target.value)
+                setSortType(e.target.value)
               }}
               label="Тип сортировки"
             >
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              {
+                sorts && sorts.map((sort, index) => (
+                  <MenuItem key={sort.id} value={sort.value}>{sort.title}</MenuItem>
+                ))
+              }
             </Select>
           </FormControl>
           <Button
             variant="contained"
             color="primary"
             className={css(styles.button)}
+            onClick={handleSort}
           >
             Отсортировать
           </Button>

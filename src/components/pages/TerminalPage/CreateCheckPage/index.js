@@ -1,3 +1,3 @@
-import CreateCheckPage from './component'
+import CreateCheckPage from './container'
 
 export default CreateCheckPage

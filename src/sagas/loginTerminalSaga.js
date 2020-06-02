@@ -1,18 +1,22 @@
 import { takeEvery, call, put } from 'redux-saga/effects'
 import axios from 'axios'
+import Cookies from 'universal-cookie'
 
 import { putLoginTerminalData } from '@/store/actions/loginTerminal'
+import { checkAccess } from '@/store/actions/access'
+
+const cookies = new Cookies()
 
 function onLoginTerminal (data) {
   return axios
     .post('https://flowers-manager-api.herokuapp.com/api/terminal/auth/login', {
+      floristPassword: 'test',
       terminalLogin: 'test',
       terminalPassword: 'test',
-      floristPassword: data,
     })
     .then(
       response => {
-        axios.defaults.headers.common['AuthTerm'] = response.data.token
+        cookies.set('AuthTerm', `Bearer ${response.data.token}`)
         return response.data
       }
     )
@@ -20,8 +24,8 @@ function onLoginTerminal (data) {
 
 function * putData (action) {
   try {
-    const terminalData = yield call(onLoginTerminal, action.payload)
-    yield put(putLoginTerminalData(terminalData))
+    yield call(onLoginTerminal, action.payload)
+    yield put(checkAccess())
   } catch (error) {
     console.log(error)
   }

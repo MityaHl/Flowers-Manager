@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import TerminalPage from './components/pages/TerminalPage/component'
+import TerminalPage from './components/pages/TerminalPage'
 import EnterPage from '@/components/pages/EnterPage'
 import ShopLoginForm from '@/components/pages/ShopLoginForm'
 

@@ -6,15 +6,18 @@ import { TextField } from 'formik-material-ui'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import Cookies from 'universal-cookie'
 
 import styles from './styles'
 
-const ShopLoginForm = ({ loginTerminalData, loginShopData, loginTerminal, loginShop }) => {
+const cookies = new Cookies()
+
+const ShopLoginForm = ({ loginTerminalData, loginShopData, loginTerminal, loginShop, access }) => {
   const onLoginShop = useCallback(() => {
     loginShop()
   })
 
-  if (loginTerminalData.token) {
+  if (access) {
     return (
       <Redirect to="/terminal/orders" />
     )
@@ -47,13 +50,13 @@ const ShopLoginForm = ({ loginTerminalData, loginShopData, loginTerminal, loginS
                   </Typography>
                   <Field
                     component={TextField}
-                    label="Логин магазина"
+                    label="Логин "
                     name="terminalLogin"
                     variant="outlined"
                     className={css(styles.field)} />
                   <Field
                     component={TextField}
-                    label="Пароль магазина"
+                    label="Пароль "
                     name="terminalPassword"
                     type="password"
                     variant="outlined"
@@ -93,7 +96,12 @@ const ShopLoginForm = ({ loginTerminalData, loginShopData, loginTerminal, loginS
                     color="primary"
                     className={css(styles.field)}
                     onClick={() => {
-                      loginTerminal(values.floristPassword)
+                      const data = {
+                        floristPassword: values.floristPassword,
+                        terminalLogin: loginShopData.login,
+                        terminalPassword: loginShopData.password,
+                      }
+                      loginTerminal(data)
                     }}
                   >
                     Войти в терминал

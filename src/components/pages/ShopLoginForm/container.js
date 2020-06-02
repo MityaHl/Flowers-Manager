@@ -8,6 +8,7 @@ import ShopLoginForm from './component'
 const mapStateToProps = state => ({
   loginTerminalData: state.loginTerminal,
   loginShopData: state.loginShop,
+  access: state.access,
 })
 
 const mapDispatchToProps = dispatch => ({

@@ -8,9 +8,11 @@ function onLoginShop (data) {
     login: data.terminalLogin,
     password: data.terminalPassword,
   }
-  console.log(data)
   return axios
-    .post('https://flowers-manager-api.herokuapp.com/api/terminal/auth/preLogin', data)
+    .post('https://flowers-manager-api.herokuapp.com/api/terminal/auth/preLogin', {
+      login: 'test',
+      password: 'test',
+    })
     .then(
       response => {
         return response.data

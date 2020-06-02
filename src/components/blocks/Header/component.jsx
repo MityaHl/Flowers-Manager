@@ -12,7 +12,7 @@ import HeaderMenuButtons from '@/components/controls/HeaderMenuButtons'
 
 import styles from './styles'
 
-const Header = () => {
+const Header = ({ florist }) => {
   const [openMenu, setOpenMenu] = useState(null)
 
   const openHeaderMenu = event => {
@@ -64,7 +64,7 @@ const Header = () => {
               className={css(styles.headerButton)}
               endIcon={<ExpandMoreIcon />}
             >
-              Florist
+              {florist.name}
             </Button>
             <Menu
               anchorEl={openMenu}

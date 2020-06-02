@@ -3,10 +3,11 @@ import { StyleSheet } from 'aphrodite'
 export default StyleSheet.create({
   orderListControls: {
     height: '100%',
-    borderRight: '1px solid black',
+    borderRight: '1px solid grey',
+    backgroundColor: '#F4F6F5',
   },
   orderListSearch: {
-    borderBottom: '1px solid black',
+    borderBottom: '1px solid grey',
   },
   form: {
     marginTop: '20px',
